@@ -1,7 +1,7 @@
 #pragma once
 
 #include <tunable_kernel.h>
-#include <lattice_field.h>
+//#include <lattice_field.h>
 #include <register_traits.h>
 #include <reduction_kernel.h>
 #include <reduction_kernel_host.h>
@@ -138,15 +138,17 @@ namespace quda
        @param[in] block_size_y Number of y threads in the block
        @param[in] location Optional overload for the location where the calculation will take place
      */
+    /*
     TunableReduction2D(const LatticeField &field, unsigned int block_size_y = 2,
-                       QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
+		       QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
       TunableKernel(field, location),
       n_items(field.Volume()),
       block_size_y(block_size_y)
     {
       if (commAsyncReduction()) strcat(aux, "async,");
     }
-
+    */
+    
     /**
        @brief Constructor for kernels that have a problem size only
        @param[in] n_items Number of items being reduced
@@ -289,12 +291,13 @@ namespace quda
        @param[in] field A lattice field instance used for metadata
        @param[in] location Optional overload for the location where the calculation will take place
      */
+    /*
     TunableMultiReduction(const LatticeField &field, unsigned int block_size_y, unsigned int n_batch,
                           unsigned int n_batch_block_max = 1u, QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
       TunableReduction2D(field, block_size_y, location), n_batch(n_batch), n_batch_block_max(n_batch_block_max)
     {
     }
-
+    */
     /**
        @brief Constructor for kernels that have a problem size only
        @param[in] n_items Number of items being reduced

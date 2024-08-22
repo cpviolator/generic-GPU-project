@@ -1,7 +1,7 @@
 #include <communicator_quda.h>
 #include <map>
 #include <array.h>
-#include <lattice_field.h>
+//#include <lattice_field.h>
 
 namespace quda
 {
@@ -49,7 +49,7 @@ namespace quda
                                  std::forward_as_tuple(get_default_communicator(), split_key.data()));
     }
 
-    LatticeField::freeGhostBuffer(); // Destroy the (IPC) Comm buffers with the old communicator.
+    //LatticeField::freeGhostBuffer(); // Destroy the (IPC) Comm buffers with the old communicator.
 
     current_key = split_key;
   }

@@ -2,7 +2,7 @@
 
 #include <tune_quda.h>
 #include <target_device.h>
-#include <lattice_field.h>
+//#include <lattice_field.h>
 #include <kernel_helper.h>
 #include <kernel.h>
 #include <kernel_ops_target.h>
@@ -91,6 +91,7 @@ namespace quda
       const_cast<TunableKernel *>(this)->launch_device<Functor, grid_stride>(KERNEL(raw_kernel), tp, stream, arg);
     }
 
+    /*
     TunableKernel(const LatticeField &field, QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
       location(location != QUDA_INVALID_FIELD_LOCATION ? location : field.Location())
     {
@@ -100,7 +101,8 @@ namespace quda
       if (this->location == QUDA_CPU_FIELD_LOCATION) strcat(aux, getOmpThreadStr());
       strcat(aux, field.AuxString().c_str());
     }
-
+    */
+    
     TunableKernel(size_t n_items, QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) : location(location)
     {
       u64toa(vol, n_items);
