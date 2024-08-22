@@ -5,6 +5,15 @@
 namespace quda
 {
 
+  /**
+     @brief Helper function for setting auxilary string
+     @return String containing location and compilation type
+  */
+  inline const char *compile_type_str(QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION)
+  {
+    return location == QUDA_CUDA_FIELD_LOCATION ? "GPU-offline," : "CPU,";
+  }
+  
   struct kernel_t {
     const void *func;
     const std::string name;

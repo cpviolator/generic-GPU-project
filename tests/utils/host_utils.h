@@ -4,13 +4,13 @@
 #include <array>
 #include <quda.h>
 #include <random_quda.h>
-#include <color_spinor_field.h>
+//#include <color_spinor_field.h>
 
-constexpr size_t gauge_site_size = 18;      // real numbers per link
-constexpr size_t spinor_site_size = 24;     // real numbers per wilson spinor
-constexpr size_t stag_spinor_site_size = 6; // real numbers per staggered 'spinor'
-constexpr size_t clover_site_size = 72;     // real numbers per block-diagonal clover matrix
-constexpr size_t mom_site_size = 10;        // real numbers per momentum
+//constexpr size_t gauge_site_size = 18;      // real numbers per link
+//constexpr size_t spinor_site_size = 24;     // real numbers per wilson spinor
+//constexpr size_t stag_spinor_site_size = 6; // real numbers per staggered 'spinor'
+//constexpr size_t clover_site_size = 72;     // real numbers per block-diagonal clover matrix
+//constexpr size_t mom_site_size = 10;        // real numbers per momentum
 
 extern int Z[4];
 extern int V;
@@ -22,14 +22,14 @@ extern int E1, E1h, E2, E3, E4;
 extern int E[4];
 extern int V_ex, Vh_ex;
 
-extern double kappa5;
-extern int Ls;
+//extern double kappa5;
+//extern int Ls;
 extern int V5;
 extern int V5h;
 
-extern size_t host_gauge_data_type_size;
-extern size_t host_spinor_data_type_size;
-extern size_t host_clover_data_type_size;
+//extern size_t host_gauge_data_type_size;
+//extern size_t host_spinor_data_type_size;
+//extern size_t host_clover_data_type_size;
 
 // QUDA precisions
 extern QudaPrecision &cpu_prec;
@@ -40,6 +40,8 @@ extern QudaPrecision &cuda_prec_eigensolver;
 extern QudaPrecision &cuda_prec_refinement_sloppy;
 extern QudaPrecision &cuda_prec_ritz;
 
+
+/*
 // Determine if the Laplace operator has been defined
 constexpr bool is_enabled_laplace()
 {
@@ -49,11 +51,13 @@ constexpr bool is_enabled_laplace()
   return false;
 #endif
 }
+*/
 
 // Set some basic parameters via command line or use defaults
 // Implemented in set_params.cpp
-void setQudaStaggeredDefaultInvTestParams();
+//void setQudaStaggeredDefaultInvTestParams();
 
+/*
 // Staggered gauge field utils
 //------------------------------------------------------
 void constructStaggeredHostDeviceGaugeField(void **qdp_inlink, void **qdp_longlink_cpu, void **qdp_longlink_gpu,
@@ -91,52 +95,52 @@ void reorderQDPtoMILC(void *milc_out, void **qdp_in, int V, int siteSize, QudaPr
 void reorderMILCtoQDP(void **qdp_out, void *milc_in, int V, int siteSize, QudaPrecision out_precision,
                       QudaPrecision in_precision);
 //------------------------------------------------------
-
+*/
 // Set some basic parameters via command line or use defaults
 void setQudaPrecisions();
-void setQudaMgSolveTypes();
-void setQudaDefaultMgTestParams();
+//void setQudaMgSolveTypes();
+//void setQudaDefaultMgTestParams();
 
 // Wilson type gauge and clover fields
 //------------------------------------------------------
-void constructQudaGaugeField(void **gauge, int type, QudaPrecision precision, QudaGaugeParam *param);
-void constructHostGaugeField(void **gauge, QudaGaugeParam &gauge_param, int argc, char **argv);
-void constructHostGaugeField(quda::GaugeField &gauge, QudaGaugeParam &gauge_param, int argc, char **argv);
-void constructHostCloverField(void *clover, void *clover_inv, QudaInvertParam &inv_param);
-void constructQudaCloverField(void *clover, double norm, double diag, QudaPrecision precision);
-template <typename Float> void constructCloverField(Float *res, double norm, double diag);
-template <typename Float> void constructUnitGaugeField(Float **res, QudaGaugeParam *param);
-template <typename Float>
-void constructRandomGaugeField(Float **res, QudaGaugeParam *param, QudaDslashType dslash_type = QUDA_WILSON_DSLASH);
-template <typename Float> void applyGaugeFieldScaling(Float **gauge, int Vh, QudaGaugeParam *param);
+//void constructQudaGaugeField(void **gauge, int type, QudaPrecision precision, QudaGaugeParam *param);
+//void constructHostGaugeField(void **gauge, QudaGaugeParam &gauge_param, int argc, char **argv);
+//void constructHostGaugeField(quda::GaugeField &gauge, QudaGaugeParam &gauge_param, int argc, char **argv);
+//void constructHostCloverField(void *clover, void *clover_inv, QudaInvertParam &inv_param);
+//void constructQudaCloverField(void *clover, double norm, double diag, QudaPrecision precision);
+//template <typename Float> void constructCloverField(Float *res, double norm, double diag);
+//template <typename Float> void constructUnitGaugeField(Float **res, QudaGaugeParam *param);
+//template <typename Float>
+//void constructRandomGaugeField(Float **res, QudaGaugeParam *param, QudaDslashType dslash_type = QUDA_WILSON_DSLASH);
+//template <typename Float> void applyGaugeFieldScaling(Float **gauge, int Vh, QudaGaugeParam *param);
 //------------------------------------------------------
 
 // Spinor utils
 //------------------------------------------------------
-void constructWilsonTestSpinorParam(quda::ColorSpinorParam *csParam, const QudaInvertParam *inv_param,
-                                    const QudaGaugeParam *gauge_param);
-void constructPointSpinorSource(void *v, QudaPrecision precision, const int *const x, const int dil,
-                                const int *const src);
-void constructWallSpinorSource(void *v, int nSpin, int nColor, QudaPrecision precision, const int dil);
-void constructRandomSpinorSource(void *v, int nSpin, int nColor, QudaPrecision precision, QudaSolutionType sol_type,
-                                 const int *const x, int nDim, quda::RNG &rng);
+//void constructWilsonTestSpinorParam(quda::ColorSpinorParam *csParam, const QudaInvertParam *inv_param,
+//const QudaGaugeParam *gauge_param);
+//void constructPointSpinorSource(void *v, QudaPrecision precision, const int *const x, const int dil,
+//const int *const src);
+//void constructWallSpinorSource(void *v, int nSpin, int nColor, QudaPrecision precision, const int dil);
+//void constructRandomSpinorSource(void *v, int nSpin, int nColor, QudaPrecision precision, QudaSolutionType sol_type,
+//const int *const x, int nDim, quda::RNG &rng);
 //------------------------------------------------------
 
 // Helper functions
 //------------------------------------------------------
-bool is_pc_solution(QudaSolutionType solution_type);
-bool is_full_solution(QudaSolutionType type);
+//bool is_pc_solution(QudaSolutionType solution_type);
+//bool is_full_solution(QudaSolutionType type);
 
-bool is_preconditioned_solve(QudaSolveType type);
-bool is_normal_solve(QudaInverterType inv_type, QudaSolveType solve_type);
+//bool is_preconditioned_solve(QudaSolveType type);
+//bool is_normal_solve(QudaInverterType inv_type, QudaSolveType solve_type);
 
-bool is_hermitian_solver(QudaInverterType type);
-bool support_solution_accumulator_pipeline(QudaInverterType type);
-bool is_normal_residual(QudaInverterType type);
+//bool is_hermitian_solver(QudaInverterType type);
+//bool support_solution_accumulator_pipeline(QudaInverterType type);
+//bool is_normal_residual(QudaInverterType type);
 
-bool is_staggered(QudaDslashType type);
-bool is_chiral(QudaDslashType type);
-bool is_laplace(QudaDslashType type);
+//bool is_staggered(QudaDslashType type);
+//bool is_chiral(QudaDslashType type);
+//bool is_laplace(QudaDslashType type);
 
 //------------------------------------------------------
 
@@ -168,23 +172,23 @@ int neighborIndexFullLattice(int i, int dx4, int dx3, int dx2, int dx1);
 int neighborIndex(int dim[4], int index, int oddBit, int dx[4]);
 int neighborIndexFullLattice(int dim[4], int index, int dx[4]);
 
-int neighborIndex_mg(int i, int oddBit, int dx4, int dx3, int dx2, int dx1);
-int neighborIndexFullLattice_mg(int i, int dx4, int dx3, int dx2, int dx1);
+//int neighborIndex_mg(int i, int oddBit, int dx4, int dx3, int dx2, int dx1);
+//int neighborIndexFullLattice_mg(int i, int dx4, int dx3, int dx2, int dx1);
 
-void printSpinorElement(void *spinor, int X, QudaPrecision precision);
-void printGaugeElement(void *gauge, int X, QudaPrecision precision);
+//void printSpinorElement(void *spinor, int X, QudaPrecision precision);
+//void printGaugeElement(void *gauge, int X, QudaPrecision precision);
 template <typename Float> void printVector(Float *v);
 
-int fullLatticeIndex(int i, int oddBit);
-int fullLatticeIndex(int dim[4], int index, int oddBit);
+//int fullLatticeIndex(int i, int oddBit);
+//int fullLatticeIndex(int dim[4], int index, int oddBit);
 int getOddBit(int X);
 
 // Custom "sitelink" enum used to create unphased, MILC phased, or continuous U(1) phased links
-enum {
-  SITELINK_PHASE_NO = 0,   // no phase, used to create SU(3) links
-  SITELINK_PHASE_MILC = 1, // MILC phase, used to test staggered fermions
-  SITELINK_PHASE_U1 = 2    // continuous phase, used to test reconstruct 13
-};
+//enum {
+//SITELINK_PHASE_NO = 0,   // no phase, used to create SU(3) links
+//SITELINK_PHASE_MILC = 1, // MILC phase, used to test staggered fermions
+//SITELINK_PHASE_U1 = 2    // continuous phase, used to test reconstruct 13
+//};
 
 /**
    @brief Host implementation of creating a random set of gauge links, with optional phases
@@ -192,32 +196,32 @@ enum {
    @param[in] precision Precision of field
    @param[in] phase Type of phase; 0 == no additional phase, 1 == MILC phases, 2 == U(1) phase
  */
-void createSiteLinkCPU(void *const *const link, QudaPrecision precision, int phase);
-void createSiteLinkCPU(quda::GaugeField &u, QudaPrecision precision, int phase);
+//void createSiteLinkCPU(void *const *const link, QudaPrecision precision, int phase);
+//void createSiteLinkCPU(quda::GaugeField &u, QudaPrecision precision, int phase);
 
-void su3_construct(void *mat, QudaReconstructType reconstruct, QudaPrecision precision);
-void su3_reconstruct(void *mat, int dir, int ga_idx, QudaReconstructType reconstruct, QudaPrecision precision,
-                     QudaGaugeParam *param);
+//void su3_construct(void *mat, QudaReconstructType reconstruct, QudaPrecision precision);
+//void su3_reconstruct(void *mat, int dir, int ga_idx, QudaReconstructType reconstruct, QudaPrecision precision,
+//QudaGaugeParam *param);
 
-void compare_spinor(void *spinor_cpu, void *spinor_gpu, int len, QudaPrecision precision);
-void strong_check(void *spinor, void *spinorGPU, int len, QudaPrecision precision);
+//void compare_spinor(void *spinor_cpu, void *spinor_gpu, int len, QudaPrecision precision);
+//void strong_check(void *spinor, void *spinorGPU, int len, QudaPrecision precision);
 int compare_floats(void *a, void *b, int len, double epsilon, QudaPrecision precision);
 double compare_floats_v2(void *a, void *b, int len, double epsilon, QudaPrecision precision);
 
-void check_gauge(void **, void **, double epsilon, QudaPrecision precision);
+//void check_gauge(void **, void **, double epsilon, QudaPrecision precision);
 
-int strong_check_link(void **linkA, const char *msgA, void **linkB, const char *msgB, int len, QudaPrecision prec);
-int strong_check_link(const quda::GaugeField &linkA, const std::string &msgA, const quda::GaugeField &linkB,
-                      const std::string &msgB);
-int strong_check_mom(void *momA, void *momB, int len, QudaPrecision prec);
+//int strong_check_link(void **linkA, const char *msgA, void **linkB, const char *msgB, int len, QudaPrecision prec);
+//int strong_check_link(const quda::GaugeField &linkA, const std::string &msgA, const quda::GaugeField &linkB,
+//const std::string &msgB);
+//int strong_check_mom(void *momA, void *momB, int len, QudaPrecision prec);
 
 /**
    @brief Host reference implementation of the momentum action
    contribution.
  */
-double mom_action(void *mom, QudaPrecision prec, int len);
+//double mom_action(void *mom, QudaPrecision prec, int len);
 
-void createMomCPU(void *mom, QudaPrecision precision, double max_val = 1.0);
+//void createMomCPU(void *mom, QudaPrecision precision, double max_val = 1.0);
 
 /**
    @brief Create four Staggered spinor fields, whose outer product is used for momentum calculations
@@ -239,13 +243,13 @@ int process_command_line_option(int argc, char **argv, int *idx);
 int process_options(int argc, char **argv);
 
 // Implemented in face_gauge.cpp
-void exchange_cpu_sitelink(quda::lat_dim_t &X, void **sitelink, void **ghost_sitelink, void **ghost_sitelink_diag,
-                           QudaPrecision gPrecision, QudaGaugeParam *param, int optflag);
-void exchange_cpu_sitelink_ex(quda::lat_dim_t &X, quda::lat_dim_t &R, void **sitelink, QudaGaugeFieldOrder cpu_order,
-                              QudaPrecision gPrecision, int optflag, int geometry);
-void exchange_cpu_staple(quda::lat_dim_t &X, void *staple, void **ghost_staple, QudaPrecision gPrecision);
-void exchange_llfat_init(QudaPrecision prec);
-void exchange_llfat_cleanup(void);
+//void exchange_cpu_sitelink(quda::lat_dim_t &X, void **sitelink, void **ghost_sitelink, void **ghost_sitelink_diag,
+//                           QudaPrecision gPrecision, QudaGaugeParam *param, int optflag);
+//void exchange_cpu_sitelink_ex(quda::lat_dim_t &X, quda::lat_dim_t &R, void **sitelink, QudaGaugeFieldOrder cpu_order,
+//                              QudaPrecision gPrecision, int optflag, int geometry);
+//void exchange_cpu_staple(quda::lat_dim_t &X, void *staple, void **ghost_staple, QudaPrecision gPrecision);
+//void exchange_llfat_init(QudaPrecision prec);
+//void exchange_llfat_cleanup(void);
 
 // Implemented in host_blas.cpp
 double norm_2(void *vector, int len, QudaPrecision precision);
@@ -270,6 +274,7 @@ inline QudaPrecision getPrecision(int i)
   return QUDA_INVALID_PRECISION;
 }
 
+/*
 inline int getReconstructNibble(QudaReconstructType recon)
 {
   switch (recon) {
@@ -281,6 +286,7 @@ inline int getReconstructNibble(QudaReconstructType recon)
   default: return 0;
   }
 }
+*/
 
 /**
   @brief Return the negative exponent of a reasonable expected tolerance for a given precision
@@ -325,6 +331,7 @@ inline void safe_strcpy(char *cstr, const std::string &str, size_t limit, const 
   }
 }
 
+/*
 // MG param types
 void setMultigridParam(QudaMultigridParam &mg_param);
 void setStaggeredMultigridParam(QudaMultigridParam &mg_param);
@@ -350,3 +357,4 @@ void setStaggeredGaugeParam(QudaGaugeParam &gauge_param);
 // Smear param types
 void setGaugeSmearParam(QudaGaugeSmearParam &smear_param);
 void setFermionSmearParam(QudaInvertParam &inv_param, double omega, int steps);
+*/
