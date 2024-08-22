@@ -1,4 +1,4 @@
-# GENERIC GPU PROJECT GPU 
+# GENERIC GPU PROJECT
 
 ## Overview
 
