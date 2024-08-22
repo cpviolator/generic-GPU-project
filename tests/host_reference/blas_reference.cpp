@@ -7,9 +7,9 @@
 #include <inttypes.h>
 
 #include <util_quda.h>
-#include <host_utils.h>
+//#include <host_utils.h>
 #include <command_line_params.h>
-#include "misc.h"
+//#include "misc.h"
 
 #include <eigen_helper.h>
 

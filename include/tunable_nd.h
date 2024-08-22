@@ -1,13 +1,12 @@
 #pragma once
 
 #include <tunable_kernel.h>
-#include <lattice_field.h>
+//#include <lattice_field.h>
 #include <kernel.h>
 #include <kernel_host.h>
 
 namespace quda
 {
-
   /**
      @brief This derived tunable class is for kernels with simple 1-d
      parallelism, and partners the Kernel1D kernel.  This is the base
@@ -79,8 +78,8 @@ namespace quda
        @param[in] field A lattice field instance used for metadata
        @param[in] location Optional overload for the location where the calculation will take place
      */
-    TunableKernel1D_base(const LatticeField &field, QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
-      TunableKernel(field, location) {}
+    //TunableKernel1D_base(const LatticeField &field, QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
+    //TunableKernel(field, location) {}
 
     /**
        @brief Constructor for kernels that have a problem size only
@@ -111,10 +110,10 @@ namespace quda
        @param[in] field A lattice field instance used for metadata
        @param[in] location Optional overload for the location where the calculation will take place
      */
-    TunableKernel1D(const LatticeField &field, QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
-      TunableKernel1D_base<false>(field, location)
-    {
-    }
+    //TunableKernel1D(const LatticeField &field, QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
+    //TunableKernel1D_base<false>(field, location)
+    //{
+    //}
 
     /**
        @brief Constructor for kernels that have a problem size only
@@ -139,10 +138,10 @@ namespace quda
        @param[in] field A lattice field instance used for metadata
        @param[in] location Optional overload for the location where the calculation will take place
      */
-    TunableGridStrideKernel1D(const LatticeField &field, QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
-      TunableKernel1D_base<true>(field, location)
-    {
-    }
+    //TunableGridStrideKernel1D(const LatticeField &field, QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
+    //TunableKernel1D_base<true>(field, location)
+    //{
+    //}
 
     /**
        @brief Constructor for kernels that have a problem size only
@@ -228,12 +227,12 @@ namespace quda
        @param[in] field A lattice field instance used for metadata
        @param[in] vector_length_y Batch size of the computation in the y-dimension
        @param[in] location Optional overload for the location where the calculation will take place
-     */
-    TunableKernel2D_base(const LatticeField &field, unsigned int vector_length_y,
-                         QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
-      TunableKernel1D_base<grid_stride>(field, location), vector_length_y(vector_length_y), step_y(1), tune_block_x(true)
-    {
-    }
+    */
+    //TunableKernel2D_base(const LatticeField &field, unsigned int vector_length_y,
+    //QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
+    //TunableKernel1D_base<grid_stride>(field, location), vector_length_y(vector_length_y), step_y(1), tune_block_x(true)
+    //{
+    //}
 
     /**
        @brief Constructor for kernels that have a problem size only
@@ -342,11 +341,11 @@ namespace quda
        @param[in] vector_length_y Batch size of the computation in the y-dimension
        @param[in] location Optional overload for the location where the calculation will take place
      */
-    TunableKernel2D(const LatticeField &field, unsigned int vector_length_y,
-                    QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
-      TunableKernel2D_base<false>(field, vector_length_y, location)
-    {
-    }
+    //TunableKernel2D(const LatticeField &field, unsigned int vector_length_y,
+    //QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
+    //TunableKernel2D_base<false>(field, vector_length_y, location)
+    //{
+    //}
 
     /**
        @brief Constructor for kernels that have a problem size only
@@ -376,11 +375,11 @@ namespace quda
        @param[in] vector_length_y Batch size of the computation in the y-dimension
        @param[in] location Optional overload for the location where the calculation will take place
      */
-    TunableGridStrideKernel2D(const LatticeField &field, unsigned int vector_length_y,
-                              QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
-      TunableKernel2D_base<true>(field, vector_length_y, location)
-    {
-    }
+    //TunableGridStrideKernel2D(const LatticeField &field, unsigned int vector_length_y,
+    //QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
+    //TunableKernel2D_base<true>(field, vector_length_y, location)
+    //{
+    //}
 
     /**
        @brief Constructor for kernels that have a problem size only
@@ -472,15 +471,15 @@ namespace quda
        @param[in] vector_length_y Batch size of the computation in the y-dimension
        @param[in] vector_length_z Batch size of the computation in the z-dimension
        @param[in] location Optional overload for the location where the calculation will take place
-     */
-    TunableKernel3D_base(const LatticeField &field, unsigned int vector_length_y, unsigned int vector_length_z,
-                         QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
-      TunableKernel2D_base<grid_stride>(field, vector_length_y, location),
-      vector_length_z(vector_length_z),
-      step_z(1),
-      tune_block_y(true)
-    {
-    }
+    */
+    //TunableKernel3D_base(const LatticeField &field, unsigned int vector_length_y, unsigned int vector_length_z,
+    //QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
+    //TunableKernel2D_base<grid_stride>(field, vector_length_y, location),
+    //vector_length_z(vector_length_z),
+    //step_z(1),
+    //tune_block_y(true)
+    //{
+    //}
 
     /**
        @brief Constructor for kernels that have a problem size only
@@ -608,11 +607,11 @@ namespace quda
        @param[in] vector_length_z Batch size of the computation in the z-dimension
        @param[in] location Optional overload for the location where the calculation will take place
      */
-    TunableKernel3D(const LatticeField &field, unsigned int vector_length_y, unsigned int vector_length_z,
-                    QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
-      TunableKernel3D_base<false>(field, vector_length_y, vector_length_z, location)
-    {
-    }
+    //TunableKernel3D(const LatticeField &field, unsigned int vector_length_y, unsigned int vector_length_z,
+    //QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
+    //TunableKernel3D_base<false>(field, vector_length_y, vector_length_z, location)
+    //{
+    //}
 
     /**
        @brief Constructor for kernels that have a problem size only
@@ -641,11 +640,11 @@ namespace quda
        @param[in] vector_length_z Batch size of the computation in the z-dimension
        @param[in] location Optional overload for the location where the calculation will take place
      */
-    TunableGridStrideKernel3D(const LatticeField &field, unsigned int vector_length_y, unsigned int vector_length_z,
-                              QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
-      TunableKernel3D_base<true>(field, vector_length_y, vector_length_z, location)
-    {
-    }
+    //TunableGridStrideKernel3D(const LatticeField &field, unsigned int vector_length_y, unsigned int vector_length_z,
+    //QudaFieldLocation location = QUDA_INVALID_FIELD_LOCATION) :
+    //TunableKernel3D_base<true>(field, vector_length_y, vector_length_z, location)
+    //{
+    //}
 
     /**
        @brief Constructor for kernels that have a problem size only

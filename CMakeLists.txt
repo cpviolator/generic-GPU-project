@@ -132,61 +132,16 @@ message(STATUS "QUDA target: ${QUDA_TARGET_TYPE}")
 # QUDA OPTIONS likely to be changed by users
 # ######################################################################################################################
 
-# build options
-option(QUDA_DIRAC_DEFAULT_OFF "default value for QUDA_DIRAC_<TYPE> setting" $ENV{QUDA_DIRAC_DEFAULT_OFF})
-mark_as_advanced(QUDA_DIRAC_DEFAULT_OFF)
-if(QUDA_DIRAC_DEFAULT_OFF)
-  set(QUDA_DIRAC_DEFAULT OFF)
-else()
-  set(QUDA_DIRAC_DEFAULT ON)
-endif()
-
-option(QUDA_DIRAC_WILSON "build Wilson Dirac operators" ${QUDA_DIRAC_DEFAULT})
-option(QUDA_DIRAC_CLOVER "build clover Dirac operators" ${QUDA_DIRAC_DEFAULT})
-option(QUDA_DIRAC_DOMAIN_WALL "build domain wall Dirac operators" ${QUDA_DIRAC_DEFAULT})
-option(QUDA_DIRAC_STAGGERED "build staggered Dirac operators" ${QUDA_DIRAC_DEFAULT})
-option(QUDA_DIRAC_TWISTED_MASS "build twisted mass Dirac operators" ${QUDA_DIRAC_DEFAULT})
-option(QUDA_DIRAC_TWISTED_CLOVER "build twisted clover Dirac operators" ${QUDA_DIRAC_DEFAULT})
-option(QUDA_DIRAC_CLOVER_HASENBUSCH "build clover Hasenbusch twist operators" ${QUDA_DIRAC_DEFAULT})
-option(QUDA_DIRAC_NDEG_TWISTED_MASS "build non-degenerate twisted mass Dirac operators" ${QUDA_DIRAC_DEFAULT})
-option(QUDA_DIRAC_NDEG_TWISTED_CLOVER "build non-degenerate twisted clover Dirac operators" ${QUDA_DIRAC_DEFAULT})
-option(QUDA_DIRAC_LAPLACE "build laplace operator" ${QUDA_DIRAC_DEFAULT})
-
-option(QUDA_DIRAC_DISTANCE_PRECONDITIONING "build code for distance preconditioned Wilson/clover Dirac operators" OFF)
-
-option(QUDA_COVDEV "build code for covariant derivative" OFF)
-
 option(QUDA_QIO "build QIO code for binary I/O" OFF)
 
 # Multi-GPU options
 option(QUDA_QMP "build the QMP multi-GPU code" OFF)
 option(QUDA_MPI "build the MPI multi-GPU code" OFF)
 
-# ARPACK
-option(QUDA_ARPACK "build arpack interface" OFF)
-option(QUDA_ARPACK_LOGGING "enable ARPACK logging (not available for NG)" OFF)
-
 # OpenBLAS
 option(QUDA_OPENBLAS "enable OpenBLAS" OFF)
 
-# Interface options
-option(QUDA_INTERFACE_QDP "build qdp interface" ON)
-option(QUDA_INTERFACE_MILC "build milc interface" ON)
-option(QUDA_INTERFACE_CPS "build cps interface" OFF)
-option(QUDA_INTERFACE_QDPJIT "build qdpjit interface" OFF)
-option(QUDA_INTERFACE_BQCD "build bqcd interface" OFF)
-option(QUDA_INTERFACE_TIFR "build tifr interface" OFF)
-option(QUDA_INTERFACE_ALL "enable all data-orders triggered by the various interfaces" OFF)
-
-# QDPJIT
-option(QUDA_QDPJIT "build QDP-JIT support?" OFF)
-
-set(QUDA_ARPACK_HOME
-  ""
-  CACHE PATH "path to arpack / parpack")
-set(QUDA_OPENBLAS_HOME
-    ""
-    CACHE PATH "path to OpenBLAS")
+set(QUDA_OPENBLAS_HOME "" CACHE PATH "path to OpenBLAS")
 
 # ######################################################################################################################
 # QUDA ADVANCED OPTIONS that usually should not be changed by users
@@ -206,16 +161,6 @@ set_property(CACHE QUDA_ORDER_FP_MG PROPERTY STRINGS 2 4 8)
 option(QUDA_BUILD_NATIVE_LAPACK "build the native blas/lapack library according to QUDA_TARGET" ON)
 option(QUDA_BUILD_NATIVE_FFT "build the native FFT library according to QUDA_TARGET" ON)
 
-# QUDA uses tiling routines to compute certain BLAS routines. The maximum allowable
-# tile size is governed by this number. The larger the number, the faster the routines
-# will compute, but it will take longer to compile.
-set(QUDA_MAX_MULTI_BLAS_N
-  "4"
-  CACHE STRING "maximum value to initialize template for multi-blas /-reduce")
-if(QUDA_MAX_MULTI_BLAS_N GREATER 32)
-  message(SEND_ERROR "Maximum QUDA_MAX_MULTI_BLAS_N is 32.")
-endif()
-
 set(QUDA_PRECISION
   "14"
   CACHE STRING "which precisions to instantiate in QUDA (4-bit number - double, single, half, quarter)")
@@ -223,40 +168,17 @@ set(QUDA_RECONSTRUCT
   "7"
   CACHE STRING "which reconstructs to instantiate in QUDA (3-bit number - 18, 13/12, 9/8)")
 
-option(QUDA_CLOVER_DYNAMIC "Dynamically invert the clover term" ON)
-option(QUDA_CLOVER_RECONSTRUCT "set to ON to enable compressed clover storage (requires QUDA_CLOVER_DYNAMIC)" ON)
-option(QUDA_CLOVER_CHOLESKY_PROMOTE "Whether to promote the internal precision when inverting the clover term" ON)
-
-option(QUDA_IMPROVED_STAGGERED_EIGENSOLVER_CTEST "Whether to run eigensolver ctests against the improved staggered operator (requires QUDA_DIRAC_STAGGERED)" OFF)
-
-# Set CTest options
-option(QUDA_CTEST_SEP_DSLASH_POLICIES "Test Dslash policies separately in ctest instead of only autotuning them." OFF)
-option(QUDA_CTEST_DISABLE_BENCHMARKS "Disable benchmark test" ON)
-
-option(QUDA_FAST_COMPILE_REDUCE "enable fast compilation in blas and reduction kernels (single warp per reduction)" OFF)
-option(QUDA_FAST_COMPILE_DSLASH "enable fast compilation in dslash kernels (~20% perf impact)" OFF)
-
 option(QUDA_ALTERNATIVE_I_TO_F "enable using alternative integer-to-float conversion" OFF)
 
 option(QUDA_OPENMP "enable OpenMP" OFF)
-set(QUDA_CXX_STANDARD
-    17
-    CACHE STRING "set the CXX Standard (14 or 17)")
-
+set(QUDA_CXX_STANDARD 17 CACHE STRING "set the CXX Standard (14 or 17)")
 set_property(CACHE QUDA_CXX_STANDARD PROPERTY STRINGS 14 17)
 
 option(QUDA_BACKWARDS "Enable stacktrace generation using backwards-cpp")
 
-option(QUDA_MULTIGRID "build multigrid solvers" OFF)
-option(QUDA_MULTIGRID_DSLASH_PROMOTE "Whether to promote the internal precision when computing the coarse dslash" OFF)
-
-# features in development
-option(QUDA_SSTEP "build s-step linear solvers" OFF)
-option(QUDA_BLOCKSOLVER "build block solvers" OFF)
 option(QUDA_USE_EIGEN "use EIGEN library (where optional)" ON)
 option(QUDA_DOWNLOAD_EIGEN "Download Eigen" ON)
 option(QUDA_DOWNLOAD_USQCD "Download USQCD software as requested by QUDA_QMP / QUDA_QIO" OFF)
-option(QUDA_DOWNLOAD_ARPACK "Download ARPACK-NG software as requested by QUDA_ARPACK" OFF)
 option(QUDA_DOWNLOAD_OPENBLAS "Download OpenBLAS software as requested by QUDA_OPENBLAS" OFF)
 
 option(QUDA_GENERATE_DOXYGEN "generate doxygen documentation")
@@ -273,24 +195,13 @@ mark_as_advanced(QUDA_FAST_COMPILE_DSLASH)
 
 mark_as_advanced(QUDA_ALTERNATIVE_I_TO_F)
 
-mark_as_advanced(QUDA_MAX_MULTI_BLAS_N)
 mark_as_advanced(QUDA_MAX_MULTI_RHS)
 mark_as_advanced(QUDA_PRECISION)
-mark_as_advanced(QUDA_RECONSTRUCT)
-mark_as_advanced(QUDA_CLOVER_CHOLESKY_PROMOTE)
-mark_as_advanced(QUDA_MULTIGRID_DSLASH_PROMOTE)
-mark_as_advanced(QUDA_CTEST_SEP_DSLASH_POLICIES)
-
 mark_as_advanced(QUDA_BACKWARDS)
 
-mark_as_advanced(QUDA_INTERFACE_ALL)
-
-mark_as_advanced(QUDA_SSTEP)
 mark_as_advanced(QUDA_USE_EIGEN)
-mark_as_advanced(QUDA_BLOCKSOLVER)
 mark_as_advanced(QUDA_CXX_STANDARD)
 
-mark_as_advanced(QUDA_ARPACK_LOGGING)
 ####################################################################################
 # END 4. QUDA advanced options that usually should not be changed by users
 ####################################################################################
@@ -374,10 +285,7 @@ set(CMAKE_C_FLAGS_SANITIZE
 
 enable_language(C)
 
-if(QUDA_INTERFACE_TIFR
-    OR QUDA_INTERFACE_BQCD
-    OR QUDA_ARPACK
-    OR QUDA_OPENBLAS)
+if(QUDA_OPENBLAS)
   set(BUILD_FORTRAN_INTERFACE ON)
   enable_language(Fortran)
 endif()
@@ -386,14 +294,6 @@ endif()
 set(CMAKE_EXE_LINKER_FLAGS_SANITIZE
     "-fsanitize=address,undefined"
     CACHE STRING "Flags used by the linker during sanitizer debug builds.")
-
-if(QUDA_CLOVER_RECONSTRUCT AND NOT QUDA_CLOVER_DYNAMIC)
-  message(SEND_ERROR "QUDA_CLOVER_RECONSTRUCT requires QUDA_CLOVER_DYNAMIC")
-endif()
-
-if (QUDA_IMPROVED_STAGGERED_EIGENSOLVER_CTEST AND NOT QUDA_DIRAC_STAGGERED)
-  message(SEND_ERROR "QUDA_IMPROVED_STAGGERED_EIGENSOLVER_CTEST requires QUDA_DIRAC_STAGGERED")
-endif()
 
 find_package(Threads REQUIRED)
 if(QUDA_OPENMP)
@@ -439,9 +339,8 @@ endif()
 
 # ######################################################################################################################
 # MPI
-# ######################################################################################################################
-# we need to enable Fortran if we want to detect MPI_Fortran_COMPILER
-if(QUDA_ARPACK OR QUDA_OPENBLAS)
+# ####################################################################################################################
+if(QUDA_OPENBLAS)
   enable_language(Fortran)
 endif()
 
@@ -550,68 +449,6 @@ if(QUDA_QIO)
   endif()
 endif()
 
-# ######################################################################################################################
-# USQCD QDPJIT
-# ######################################################################################################################
- if(QUDA_QDPJIT)
-   if(NOT QUDA_QMP)
-     message(SEND_ERROR "Specifying QUDA_QDPJIT requires use of QUDA_QMP. Please set QUDA_QMP=ON and set QMP_DIR to the location of  the QMPConfig.cmake file ( usually <qmp-install-dir>/lib/cmake/QMP ) or add the QMP installation directory to your CMAKE_PREFIX_PATH")
-   endif()
-   find_package(QDPXX REQUIRED)
-   if( NOT ${QDP_IS_QDPJIT} EQUAL 1 )
-     message(FATAL_ERROR "Found QDPXX but it is not QDP-JIT. Please specify with QDPXX_DIR pointing to the right path or add to the CMAKE_PREFIX_PATH")
-   endif()
-   set(QUDA_INTERFACE_QDPJIT ON)
- endif()
-
-
-# ######################################################################################################################
-# ARPACK
-# ######################################################################################################################
-if(QUDA_ARPACK)
-
-  if(QUDA_MPI OR QUDA_QMP)
-    set(ARPACK_MPI ON)
-  else()
-    set(ARPACK_MPI OFF)
-  endif()
-
-  if(QUDA_DOWNLOAD_ARPACK)
-    CPMAddPackage(
-      NAME
-      ARPACK-NG
-      GITHUB_REPOSITORY
-      opencollab/arpack-ng
-      GIT_TAG 3.8.0
-      OPTIONS
-      "EXAMPLES OFF ON"
-      "MPI ${ARPACK_MPI}"
-      "BLAS_openblas_LIBRARY ${OpenBLAS_LIBS}"
-    )
-    add_library(ARPACK::arpack ALIAS arpack)
-    if(ARPACK_MPI)
-      add_library(ARPACK::parpack ALIAS parpack)
-    endif()
-else(QUDA_DOWNLOAD_ARPACK)
-    find_package(PkgConfig REQUIRED)
-    # We always need the serial library
-    pkg_check_modules(ARPACK QUIET arpack)
-    if(NOT ARPACK_FOUND OR QUDA_ARPACK_HOME)
-      find_library(ARPACK arpack PATH ${QUDA_ARPACK_HOME})
-    else()
-      find_library(ARPACK ${ARPACK_LIBRARIES} PATH ${ARPACK_LIBRARY_DIRS})
-    endif()
-    # Link the parallel library if required
-    if(QUDA_MPI OR QUDA_QMP)
-      pkg_check_modules(PARPACK QUIET parpack)
-      if(NOT PARPACK_FOUND OR QUDA_ARPACK_HOME)
-        find_library(PARPACK parpack PATH ${QUDA_ARPACK_HOME})
-      else()
-        find_library(PARPACK ${PARPACK_LIBRARIES} PATH ${PARPACK_LIBRARY_DIRS})
-      endif()
-    endif()
-  endif(QUDA_DOWNLOAD_ARPACK)
-endif(QUDA_ARPACK)
 
 # ######################################################################################################################
 # OPENBLAS

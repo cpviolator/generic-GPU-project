@@ -9,10 +9,6 @@
 #include <shmem_helper.cuh>
 #include "timer.h"
 
-#ifdef USE_QDPJIT
-#include "qdp_cache.h"
-#endif
-
 #ifdef QUDA_BACKWARDSCPP
 #include "backward.hpp"
 #endif

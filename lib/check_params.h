@@ -29,8 +29,8 @@
 #endif
 
 
+/*
 // define the appropriate function for GaugeParam
-
 #if defined INIT_PARAM
 QudaGaugeParam newQudaGaugeParam(void) {
   QudaGaugeParam ret;
@@ -415,14 +415,14 @@ void printQudaInvertParam(QudaInvertParam *param) {
 #endif
 
 #ifdef INIT_PARAM
-  P(use_alternative_reliable, 0); /**< Default is to not use alternative relative updates, e.g., use delta to determine reliable trigger */
-  P(use_sloppy_partial_accumulator, 0); /**< Default is to use a high-precision accumulator (not yet supported in all solvers) */
-  P(solution_accumulator_pipeline, 1); /**< Default is solution accumulator depth of 1 */
-  P(max_res_increase, 1); /**< Default is to allow one consecutive residual increase */
-  P(max_res_increase_total, 10); /**< Default is to allow ten residual increase */
-  P(max_hq_res_increase, 1);     /**< Default is to allow one consecutive heavy-quark residual increase */
-  P(max_hq_res_restart_total, 10); /**< Default is to allow ten heavy-quark restarts */
-  P(heavy_quark_check, 10); /**< Default is to update heavy quark residual after 10 iterations */
+  P(use_alternative_reliable, 0); //< Default is to not use alternative relative updates, e.g., use delta to determine reliable trigger 
+  P(use_sloppy_partial_accumulator, 0); //< Default is to use a high-precision accumulator (not yet supported in all solvers) 
+  P(solution_accumulator_pipeline, 1); //< Default is solution accumulator depth of 1 
+  P(max_res_increase, 1); //< Default is to allow one consecutive residual increase 
+  P(max_res_increase_total, 10); //< Default is to allow ten residual increase 
+  P(max_hq_res_increase, 1);     //< Default is to allow one consecutive heavy-quark residual increase 
+  P(max_hq_res_restart_total, 10); //< Default is to allow ten heavy-quark restarts 
+  P(heavy_quark_check, 10); //< Default is to update heavy quark residual after 10 iterations 
  #else
   P(use_alternative_reliable, INVALID_INT);
   P(use_sloppy_partial_accumulator, INVALID_INT);
@@ -435,18 +435,18 @@ void printQudaInvertParam(QudaInvertParam *param) {
 #endif
 
 #ifndef CHECK_PARAM
-  P(pipeline, 0); /** Whether to use a pipelined solver */
-  P(num_offset, 0); /**< Number of offsets in the multi-shift solver */
-  P(num_src, 1); /**< Number of offsets in the multi-shift solver */
-  P(overlap, 0); /**< width of domain overlaps */
+  P(pipeline, 0); // Whether to use a pipelined solver 
+  P(num_offset, 0); //< Number of offsets in the multi-shift solver 
+  P(num_src, 1); //< Number of offsets in the multi-shift solver 
+  P(overlap, 0); //< width of domain overlaps 
 #endif
 
 #ifdef INIT_PARAM
-  for (int d = 0; d < 4; d++) { P(split_grid[d], 1); } /**< Grid of sub-partitions */
-  P(num_src_per_sub_partition, 1);                     /**< Number of sources per sub-partitions */
+  for (int d = 0; d < 4; d++) { P(split_grid[d], 1); } //< Grid of sub-partitions 
+  P(num_src_per_sub_partition, 1);                     //< Number of sources per sub-partitions 
 #else
-  for (int d = 0; d < 4; d++) { P(split_grid[d], INVALID_INT); } /**< Grid of sub-partitions */
-  P(num_src_per_sub_partition, INVALID_INT);                     /**< Number of sources per sub-partitions */
+  for (int d = 0; d < 4; d++) { P(split_grid[d], INVALID_INT); } //< Grid of sub-partitions 
+  P(num_src_per_sub_partition, INVALID_INT);                     //< Number of sources per sub-partitions 
 #endif
 
 #ifdef INIT_PARAM
@@ -1166,7 +1166,8 @@ void printQudaGaugeSmearParam(QudaGaugeSmearParam *param)
   return ret;
 #endif
 }
-
+ */
+  
 #if defined INIT_PARAM
 QudaBLASParam newQudaBLASParam(void)
 {

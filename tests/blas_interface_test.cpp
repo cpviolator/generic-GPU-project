@@ -33,10 +33,20 @@ std::array<double, 2> blas_gemm_beta_re_im = {M_LN2, M_LN10};
 
 int blas_lu_inv_mat_size = 128;
 
-namespace quda
-{
+namespace quda {
   extern void setTransferGPU(bool);
 }
+
+const char *get_blas_type_str(QudaBLASType type) {  
+  const char *s;
+  switch (type) {
+  case QUDA_BLAS_GEMM: s = "gemm"; break;
+  case QUDA_BLAS_LU_INV: s = "lu-inv"; break;
+  default: fprintf(stderr, "Error: invalid BLAS type\n"); exit(1);
+  }
+  return s;
+}
+
 
 void display_test_info(QudaBLASParam &param)
 {

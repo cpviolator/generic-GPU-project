@@ -12,9 +12,6 @@ struct quda_test {
   virtual void display_info() const
   {
     printfQuda("running %s on %lu ranks:\n", test_name.c_str(), quda::comm_size());
-    printfQuda("Grid partition info:     X  Y  Z  T\n");
-    printfQuda("                         %d  %d  %d  %d\n", dimPartitioned(0), dimPartitioned(1), dimPartitioned(2),
-               dimPartitioned(3));
   }
 
   virtual void add_command_line_group(std::shared_ptr<QUDAApp> app) const
@@ -51,9 +48,6 @@ struct quda_test {
     setQudaPrecisions(); // Set values for precisions via the command line
 
     initRand(); // call srand() with a rank-dependent seed
-
-    int X[4] = {xdim, ydim, zdim, tdim};
-    setDims(X);
   }
 
   int execute()

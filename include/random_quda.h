@@ -2,7 +2,7 @@
 
 #include <memory>
 #include <quda_define.h>
-#include <lattice_field.h>
+//#include <lattice_field.h>
 
 namespace quda {
 
@@ -27,7 +27,7 @@ namespace quda {
        @param[in] meta The field whose data we use
        @param[in] seed Seed to initialize the RNG
     */
-    RNG(const LatticeField &meta, unsigned long long seedin);
+    //RNG(const LatticeField &meta, unsigned long long seedin);
 
     unsigned long long Seed() { return seed; };
 
