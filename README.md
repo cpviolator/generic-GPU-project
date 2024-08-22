@@ -4,11 +4,11 @@
 
 GENERIC GPU PROJECT (GGP) is a library for performing calculations on graphics
 processing units (GPUs), leveraging NVIDIA's CUDA platform, as well as support
-for AMD, INTEL, and CPU architectures. It is a 'pruned' version of the [QUDA library]
-(https://github.com/lattice/quda) which itself is a highly optimised library for
+for AMD, INTEL, and CPU architectures. It is a 'pruned' version of the
+[QUDA library](https://github.com/lattice/quda) which itself is a highly optimised library for
 lattice gauge theory computations, capable of running accross different architectures.
 
-At this development stage we reatil the QUDA, Quda, and quda naming conventions
+At this development stage we reatain the QUDA, Quda, and quda naming conventions
 in the code so that we may track any future addition to the QUDA library and
 integerate with ease. This may change at a future date.
 
@@ -181,7 +181,7 @@ made based on contributions to GGP.
 *  Anthony Grebe (Fermilab)
 *  Kyriakos Hadjiyiannakou (Cyprus)
 *  Ben Hoerz (Intel)
-*  Dean Howarth (Lawrence Livermore Lab, Lawrence Berkeley Lab)
+*  Dean Howarth (Caltech, Department of Astronomy)
 *  Hwancheol Jeong (Indiana University)
 *  Xiangyu Jiang (ITP, Chinese Academy of Sciences)
 *  Balint Joo (OLCF, Oak Ridge National Laboratory, formerly Jefferson Lab)
